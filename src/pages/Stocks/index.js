@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Table from '../../components/Table';
 import FuzzySearch from '../../components/FuzzySearch';
 import { fetchStocks } from '../../helper';
+import './stocks.css';
 
 const Stocks = () => {
     const [stocksData , setStockData] = useState([]);
