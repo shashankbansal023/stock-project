@@ -1,5 +1,5 @@
 import React from 'react';
-import './tableHeaders.css';
+import './tableHeader.css';
 
 const SortButton = ({rowData, sortBy , handleAscendingSort , handleDescendingSort ,order}) => {
     return (

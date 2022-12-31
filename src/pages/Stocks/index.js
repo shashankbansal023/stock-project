@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Table from '../../components/Table';
+import FuzzySearch from '../../components/FuzzySearch';
 import { fetchStocks } from '../../helper';
 
 const Stocks = () => {
@@ -44,7 +46,12 @@ const Stocks = () => {
         fetchAllStocks();
     },[]);
     return(
-        <div>Stocks Page</div>
+        <div className='stocks-page'>
+            <div className='stocks-heading'>STOCKS INFO : </div>
+            <FuzzySearch list={stocksData} searchParameters={searchParameters} updateData={updateData}/>
+            <Table 
+                headers={headers} rowData={ filteredStocks.length ?filteredStocks: stocksData} onRowClick={navigateToQuotesPage} />
+        </div>
     )
 };
 
