@@ -1,8 +1,8 @@
-import React, { useState ,useEffect, useRef, useCallback } from 'react'
+import React, { useState , useRef, useCallback } from 'react'
 import { useParams } from 'react-router-dom';
 import Table from '../../components/Table';
 import { fetchPriceQuotes } from '../../helper';
-// import useInterval from '../../hooks/useInterval';
+import useInterval from '../../hooks/useInterval';
 import './quotes.css';
 
 // need to add keys to all arrays in project.
@@ -48,52 +48,52 @@ const Quotes = () => {
         sortByTimestamp(data, key , sortOrder.descending)
     };
 
-    // const fetchQuotes = useCallback(async() => {
-    //     try{
-    //         const res = await fetchQuotes(params.id);
-    //         const resData = await res.json();
-    //         const stockPriceData = resData.payload[params.id];
-    //         if(JSON.stringify(stockPriceData) === JSON.stringify(quotesRef.current)) return;
+    const fetchQuotes = useCallback(async() => {
+        try{
+            const res = await fetchPriceQuotes(params.id);
+            const resData = await res.json();
+            const stockPriceData = resData.payload[params.id];
+            if(JSON.stringify(stockPriceData) === JSON.stringify(quotesRef.current)) return;
             
-    //         if(orderRef.current === sortOrder.ascending){
-    //             sortByTimestamp(stockPriceData ,sortKey , sortOrder.ascending )
-    //             return;
-    //         }
-    //         if(orderRef.current === sortOrder.descending){
-    //             sortByTimestamp(stockPriceData , sortKey , sortOrder.descending);
-    //             return;
-    //         }
-    //         setQuotes([...stockPriceData]);
-    //     }catch(err){
-    //         console.log("err" , err);
-    //     }
-    // },[ params.id]);
-
-    // useInterval(fetchQuotes , 3000);
-
-    useEffect(() => {
-        const fetchQuotes = async() => {
-            try{
-                const res = await fetchPriceQuotes(params.id);
-                const resData = await res.json();
-                if(order === sortOrder.ascending){
-                    sortByTimestamp(resData.payload[params.id] ,sortKey , sortOrder.ascending )
-                    return;
-                }
-                if(order === sortOrder.descending){
-                    sortByTimestamp(resData.payload[params.id] , sortKey , sortOrder.descending);
-                    return;
-                }
-                setQuotes(resData.payload[params.id]);
-            }catch(err){
-                console.log("err" , err);
+            if(orderRef.current === sortOrder.ascending){
+                sortByTimestamp(stockPriceData ,sortKey , sortOrder.ascending )
+                return;
             }
+            if(orderRef.current === sortOrder.descending){
+                sortByTimestamp(stockPriceData , sortKey , sortOrder.descending);
+                return;
+            }
+            setQuotes([...stockPriceData]);
+        }catch(err){
+            console.log("err" , err);
         }
+    },[ params.id]);
 
-       const id = setInterval(fetchQuotes , 1000);
+    useInterval(fetchQuotes , 3000);
 
-       return () => clearInterval(id); 
-    },[params.id , order])
+    // useEffect(() => {
+    //     const fetchQuotes = async() => {
+    //         try{
+    //             const res = await fetchPriceQuotes(params.id);
+    //             const resData = await res.json();
+    //             if(order === sortOrder.ascending){
+    //                 sortByTimestamp(resData.payload[params.id] ,sortKey , sortOrder.ascending )
+    //                 return;
+    //             }
+    //             if(order === sortOrder.descending){
+    //                 sortByTimestamp(resData.payload[params.id] , sortKey , sortOrder.descending);
+    //                 return;
+    //             }
+    //             setQuotes(resData.payload[params.id]);
+    //         }catch(err){
+    //             console.log("err" , err);
+    //         }
+    //     }
+
+    //    const id = setInterval(fetchQuotes , 1000);
+
+    //    return () => clearInterval(id); 
+    // },[params.id , order])
 
     return (
         <div className='quotes-page'>
