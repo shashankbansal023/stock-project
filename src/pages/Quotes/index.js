@@ -5,7 +5,6 @@ import { fetchPriceQuotes } from '../../helper';
 import useInterval from '../../hooks/useInterval';
 import './quotes.css';
 
-// need to add keys to all arrays in project.
 const Quotes = () => {
     const [quotes , setQuotes] = useState([]);
     const [order , setOrder] = useState('');
@@ -70,30 +69,6 @@ const Quotes = () => {
     },[ params.id]);
 
     useInterval(fetchQuotes , 3000);
-
-    // useEffect(() => {
-    //     const fetchQuotes = async() => {
-    //         try{
-    //             const res = await fetchPriceQuotes(params.id);
-    //             const resData = await res.json();
-    //             if(order === sortOrder.ascending){
-    //                 sortByTimestamp(resData.payload[params.id] ,sortKey , sortOrder.ascending )
-    //                 return;
-    //             }
-    //             if(order === sortOrder.descending){
-    //                 sortByTimestamp(resData.payload[params.id] , sortKey , sortOrder.descending);
-    //                 return;
-    //             }
-    //             setQuotes(resData.payload[params.id]);
-    //         }catch(err){
-    //             console.log("err" , err);
-    //         }
-    //     }
-
-    //    const id = setInterval(fetchQuotes , 1000);
-
-    //    return () => clearInterval(id); 
-    // },[params.id , order])
 
     return (
         <div className='quotes-page'>
