@@ -1,0 +1,60 @@
+.sort-button{
+    display: flex;
+    flex-direction: column;
+    gap:2px;
+}
+table{
+    display: flex;
+    width: 100vw;
+    /* margin-top: 50px; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+tr{
+    display: flex;
+    cursor: pointer;
+}
+
+td{
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+}
+th{
+    display: flex;
+    gap: 10px;
+    /* height: 20px; */
+    width: 200px; 
+    padding: 10px;
+    justify-content: center;
+    border: 1px solid black;
+
+}
+
+.ascending{
+    background-color: transparent;
+    cursor: pointer;
+    text-align: center;
+    border: 5px solid transparent;
+    border-bottom-color: lightgray;
+}
+
+.descending{
+    background-color: transparent;
+    cursor: pointer;
+    text-align: center;
+    border: 5px solid transparent;
+    border-top-color: lightgray;
+}
+
+.ascending-active{
+    border-bottom-color: rgb(149, 144, 144); 
+}
+
+.descending-active{
+    border-top-color: rgb(133, 128, 128);
+}
